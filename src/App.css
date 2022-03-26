@@ -14,6 +14,7 @@ a {
 .container {
   padding: 20px;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .project-container {
@@ -56,4 +57,96 @@ a {
 .github-icon {
   height: 25px;
   margin-right: 20px;
+}
+.add-new-container {
+  width: 25vw;
+  height: 40vh;
+  background-color: white;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 20px;
+}
+.plus-icon {
+  height: 40%;
+}
+
+#modal-button {
+  background-color: transparent;
+  border: none;
+}
+
+/* Modal */
+
+.modalBackground {
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer {
+  width: 500px;
+  height: 350px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  color: black;
+}
+
+.form1 {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.titleCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.titleCloseBtn button {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.modalContainer .body1 {
+  flex: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.modalContainer .footer1 {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer .footer1 button {
+  width: 150px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#cancelBtn {
+  background-color: crimson;
 }

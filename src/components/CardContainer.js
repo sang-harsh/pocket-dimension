@@ -1,69 +1,89 @@
-import React, { useEffect, useState } from 'react';
-import CALCULATOR from "../utils/calculator.svg";
-import GITHUBLOGO from "../utils/github.svg";
+      import React, { useEffect, useState } from 'react';
+      import CALCULATOR from "../utils/calculator.svg";
+      import GITHUBLOGO from "../utils/github.svg";
+      import PLUS from "../utils/plus.svg";
+      import Modal from "../components/Modal";
 
-function CardContainer() {
-      const [data,setData] = useState([]);
-      const ref = [{
-            // image: CALCULATOR,
-            tech1: 'reactJS',
-            tech2: 'Rapid API',
-            tech3: 'Material UI',
-            tech4: 'Google Maps API',
-            title: 'calculator',
-            hostedLink: "https://sang-harsh.github.io/Calculator/",
-            githubLink: "https://github.com/sang-harsh/Calculator/"
-      },
-      {
-            // image: CALCULATOR,
-            tech1: 'reactJS',
-            tech2: 'Rapid API',
-            tech3: 'Material UI',
-            tech4: 'Google Maps API',
-            title: 'calculator',
-            hostedLink: "https://sang-harsh.github.io/Calculator/",
-            githubLink: "https://github.com/sang-harsh/Calculator/"
-      }]
+      import { collection, getDocs,orderBy,query} from "firebase/firestore"; 
+      import{ db } from '../firebase';
 
-      useEffect(()=>{
-            setData(ref);
-      },[])
 
-      return (
-      <div className="container">
+      function CardContainer() {
+            const [data,setData] = useState([]);
+            const [modalOpen, setModalOpen] = useState(false);
+            const colRef = collection(db, 'allProjects');
+            const q = query(colRef,orderBy('createdAt'));
 
-      {     
-     
-            data.map((element)=>
+            useEffect(()=>{
+                  getData();
+            },[]);
+            
+            function getData(){
+                  let temp = [];
+                  getDocs(q) 
+                  .then(snapshot => {
+                  snapshot.docs.forEach(element => {
+                        console.log(element.data().task);
+                        console.log();
+                        temp.push({
+                              tech1: element.data().tech1,
+                              tech2: element.data().tech2,
+                              tech3: element.data().tech3,
+                              tech4: element.data().tech4,
+                              title: element.data().title,
+                              hostedLink: element.data().hostedLink,
+                              githubLink: element.data().githubLink,
+                              id: element.id,
+                        });    
+                  });
+                  setData(temp);    
+                  }).catch((error)=>console.error(error)) 
+            }
+
+
+            return (
+            <div className="container">
+
+            {     
+      
+                  data.map((element)=>
+                        
                   
-                 
-                  <div className="project-container">
-                        <div className="main">
-                        <div className="img-container">
-                        <img src={CALCULATOR} className="projectImage" alt="not found"/>
-                        </div>
-                        <div className="tech-stack">
-                              <div className="stack">{element.tech1}</div>
-                              <div className="stack">{element.tech2}</div>
-                              <div className="stack">{element.tech3}</div>
-                              <div className="stack">{element.tech4}</div>
-                        </div>
+                        <div className="project-container">
+                              <div className="main">
+                              <div className="img-container">
+                              <img src={CALCULATOR} className="projectImage" alt="not found"/>
+                              </div>
+                              <div className="tech-stack">
+                                    <div className="stack">{element.tech1}</div>
+                                    <div className="stack">{element.tech2}</div>
+                                    <div className="stack">{element.tech3}</div>
+                                    <div className="stack">{element.tech4}</div>
+                              </div>
+                              </div>
+
+                              <div className="title">
+                              <a href={element.hostedLink} target="_blank">{element.title}</a>
+                              <a href={element.githubLink} target="_blank">
+                                    <img src={GITHUBLOGO} alt="NF" className="github-icon"/>
+                              </a>
+                              </div>
                         </div>
 
-                        <div className="title">
-                        <a href={element.hostedLink} target="_blank">{element.title}</a>
-                        <a href={element.githubLink} target="_blank">
-                              <img src={GITHUBLOGO} alt="NF" className="github-icon"/>
-                        </a>
-                        </div>
+                  )
+            }
+            
+
+            <button id="modal-button" onClick={() => {setModalOpen(true);}}>
+                  <div className="add-new-container" >
+                  <img src={PLUS} alt="NF" className="plus-icon"/>  
                   </div>
+            </button>
 
+            {modalOpen && <Modal setOpenModal={setModalOpen} />}
+
+            </div>
             )
       }
 
-      
-      </div>
-      )
-}
-
-export default CardContainer;
+      export default CardContainer;
