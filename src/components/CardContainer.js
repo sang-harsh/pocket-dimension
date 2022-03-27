@@ -1,5 +1,4 @@
       import React, { useEffect, useState } from 'react';
-      import CALCULATOR from "../utils/calculator.svg";
       import GITHUBLOGO from "../utils/github.svg";
       import PLUS from "../utils/plus.svg";
       import Modal from "../components/Modal";
@@ -13,18 +12,17 @@
             const [modalOpen, setModalOpen] = useState(false);
             const colRef = collection(db, 'allProjects');
             const q = query(colRef,orderBy('createdAt'));
-
+            
             useEffect(()=>{
                   getData();
-            },[]);
+            },[modalOpen]);
             
             function getData(){
                   let temp = [];
                   getDocs(q) 
                   .then(snapshot => {
                   snapshot.docs.forEach(element => {
-                        console.log(element.data().task);
-                        console.log();
+                        //console.log(element.data());
                         temp.push({
                               tech1: element.data().tech1,
                               tech2: element.data().tech2,
@@ -33,26 +31,22 @@
                               title: element.data().title,
                               hostedLink: element.data().hostedLink,
                               githubLink: element.data().githubLink,
-                              id: element.id,
+                              projectImage: element.data().projectImage,
                         });    
                   });
                   setData(temp);    
                   }).catch((error)=>console.error(error)) 
             }
 
-
+      
             return (
             <div className="container">
-
             {     
-      
                   data.map((element)=>
-                        
-                  
                         <div className="project-container">
                               <div className="main">
                               <div className="img-container">
-                              <img src={CALCULATOR} className="projectImage" alt="not found"/>
+                              <img src={element.projectImage} className="projectImage" alt="not found"/>
                               </div>
                               <div className="tech-stack">
                                     <div className="stack">{element.tech1}</div>
@@ -79,8 +73,8 @@
                   <img src={PLUS} alt="NF" className="plus-icon"/>  
                   </div>
             </button>
-
-            {modalOpen && <Modal setOpenModal={setModalOpen} />}
+            
+            {modalOpen && <Modal setOpenModal={setModalOpen}/>}
 
             </div>
             )
