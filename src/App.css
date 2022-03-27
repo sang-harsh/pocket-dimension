@@ -44,7 +44,10 @@ a {
 .img-container {
   width: 15vw;
 }
-
+.projectImage {
+  width: 10vw;
+  padding: 20px;
+}
 .tech-stack {
   padding: 10px;
 }
