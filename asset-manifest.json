@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/pocket-dimension/static/css/main.b85c6358.css",
+    "main.css": "/pocket-dimension/static/css/main.a6d884e9.css",
     "main.js": "/pocket-dimension/static/js/main.3a74479e.js",
     "static/media/github.svg": "/pocket-dimension/static/media/github.7894bcfab1ab247b6ad725fd8f5223ac.svg",
     "static/media/plus.svg": "/pocket-dimension/static/media/plus.4554b13eb34c6963b63cac3a924b1d8c.svg",
     "static/media/login.svg": "/pocket-dimension/static/media/login.c13f1eeaeebe3148d6f80406db2d8aa3.svg",
     "index.html": "/pocket-dimension/index.html",
-    "main.b85c6358.css.map": "/pocket-dimension/static/css/main.b85c6358.css.map",
+    "main.a6d884e9.css.map": "/pocket-dimension/static/css/main.a6d884e9.css.map",
     "main.3a74479e.js.map": "/pocket-dimension/static/js/main.3a74479e.js.map"
   },
   "entrypoints": [
-    "static/css/main.b85c6358.css",
+    "static/css/main.a6d884e9.css",
     "static/js/main.3a74479e.js"
   ]
 }
